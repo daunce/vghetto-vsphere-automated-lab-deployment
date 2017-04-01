@@ -1,0 +1,89 @@
+{
+  "FilePaths": {
+  	"NestedESXiApplianceOVA": "\\\\10.0.0.100\\iso\\VMware\\ESXi\\6.5\\Nested_ESXi6.5_Appliance_Template_v1.ova",
+	"VCSAInstaller": "\\\\10.0.0.100\\iso\\VMware\\Appliance\\6.5\\VMware-VCSA-all-6.5.0-4602587\\",
+	"NSXOVA": "C:\\Users\\primp\\Desktop\\VMware-NSX-Manager-6.3.0-5007049.ova",
+	"ESXi65aOfflineBundle": "C:\\Users\\primp\\Desktop\\ESXi650-201701001\\vmw-ESXi-6.5.0-metadata.zip"
+  },
+  "DeploymentTarget": {
+    "Type": "ESXI",
+    "Server": "10.0.0.171",
+    "Username": "root",
+    "Password": "VMware1!",
+	"TargetCluster": "<VC Deployment Only>"
+  },
+  "NestedDeploymentConfig": {
+	"vSwitchType": "VSS",
+	"VMNetwork": "VM Network",
+	"VMDatastore": "SSD_DS01",
+	"VMNetmask": "255.255.255.0",
+	"VMGateway": "10.0.0.1",
+	"VMDNS": "10.0.0.160",
+	"VMNTP": "10.0.0.160",
+	"VMPassword": "VMware1!",
+	"VMDomain": "lab.virtualtassie.com",
+	"VMSyslog": "10.0.0.1"
+  },
+  "NestedESXi": {
+	"HostName": ["vesxi65-1","vesxi65-2","vesxi65-3"],
+	"IPAddress": ["10.0.0.180","10.0.0.181","10.0.0.182"],
+  	"vCPU": "2",
+	"vMEM": "6",
+	"CachingvDisk": "4",
+	"CapacityvDisk": "8",
+	"ESXISSH": "true",
+	"ESXIVMFS": "false"
+  },
+  "VCSA": {
+  	"DeploymentSize": "tiny",
+	"Displayname": "vCenter65-1",
+	"IPAddress": "10.0.0.185",
+	"Hostname": "vCenter65-1.lab.virtualtassie.com",
+	"Prefix": "24",
+	"SSHEnable": "true"
+  },
+  "PSC": {
+  	"ExternalPSC": "1",
+	"Displayname": "PSC65-1",
+	"IPAddress": "10.0.0.186",
+	"Hostname": "PSC65-1.lab.virtualtassie.com"
+  },
+  "SSO": {
+  	"DomainName": "vsphere.local",
+	"SiteName": "Site1",
+	"Password": "VMware1!"
+  },
+  "Misc": {
+  	"NewvDCName": "Datacenter1",
+	"NewVSANClusterName": "Cluster1",
+	"UpgradeESXiTo65a": "0",
+	"AddHostByDNSName": "1"
+  },
+  "DNSCheck": {
+  	"CheckDNS": "1",
+	"WindowsDNSServer": "0",
+	"DNSServer": "DC01",
+	"DNSZoneName": "lab.virtualtassie.com"
+  },
+  "NSX": {
+  	"DeployNSX": "0",
+	"vCPU": "2",
+	"vMem": "8",
+	"Displayname": "NSX63-1",
+	"Hostname": "nsx63-1.primp-industries.com",
+	"IPAddress": "172.30.0.250",
+	"NetMask": "255.255.255.0",
+	"Gateway": "172.30.0.1",
+	"SSHEnable": "true",
+	"CEIPEnable": "false",
+	"UIPassword": "VMw@re123!",
+	"CLIPassword": "VMw@re123!"
+  },
+  "VXLAN": {
+  	"PrivateVXLANVMNetwork": "dv-private-network",
+	"VDSName": "VDS-6.5",
+	"VXLANDVPortGroup": "VXLAN",
+	"VXLANSubnet": "172.16.66.",
+	"VXLANNetmask": "255.255.255.0"
+  }
+}
