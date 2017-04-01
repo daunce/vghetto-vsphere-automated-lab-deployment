@@ -978,6 +978,12 @@ if($moveVMsIntovApp -eq 1 -and $DeploymentTarget -eq "VCENTER") {
         }
     }
 
+    if($ExternalPSC -eq 1) {
+        $PSCVM = Get-VM -Name $PSCDisplayName -Server $viConnection
+        My-Logger "Moving $PSCDisplayName into $VAppName vApp ..."
+        Move-VM -VM $PSCVM -Server $viConnection -Destination $VApp -Confirm:$false | Out-File -Append -LiteralPath $verboseLogFile
+    }
+
     if($deployVCSA -eq 1) {
         $vcsaVM = Get-VM -Name $VCSADisplayName -Server $viConnection
         My-Logger "Moving $VCSADisplayName into $VAppName vApp ..."
