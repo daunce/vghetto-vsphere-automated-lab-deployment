@@ -78,17 +78,23 @@ Here is a quick diagram to help illustrate the two deployment scenarios. The pES
 This section describes the location of the files required for deployment. The first two are mandatory for the basic deployment. For advanced deployments such as NSX 6.3, you will need to download additional files and below are examples of what is required.
 
 ```console
-$NestedESXiApplianceOVA = "C:\Users\primp\Desktop\Nested_ESXi6.5_Appliance_Template_v1.ova"
-$VCSAInstallerPath = "C:\Users\primp\Desktop\VMware-VCSA-all-6.5.0-4944578"
-$NSXOVA =  "C:\Users\primp\Desktop\VMware-NSX-Manager-6.3.0-5007049.ova"
-$ESXi65aOfflineBundle = "C:\Users\primp\Desktop\ESXi650-201701001\vmw-ESXi-6.5.0-metadata.zip"
+  "FilePaths": {
+  	"NestedESXiApplianceOVA": "\\\\10.0.0.100\\iso\\VMware\\ESXi\\6.5\\Nested_ESXi6.5_Appliance_Template_v1.ova",
+	"VCSAInstaller": "\\\\10.0.0.100\\iso\\VMware\\Appliance\\6.5\\VMware-VCSA-all-6.5.0-4602587\\",
+	"NSXOVA": "C:\\Users\\primp\\Desktop\\VMware-NSX-Manager-6.3.0-5007049.ova",
+	"ESXi65aOfflineBundle": "C:\\Users\\primp\\Desktop\\ESXi650-201701001\\vmw-ESXi-6.5.0-metadata.zip"
+  }
 ```
 
 This section describes the credentials to your physical ESXi server or vCenter Server in which the vSphere lab environment will be deployed to:
 ```console
-$VIServer = "himalaya.primp-industries.com"
-$VIUsername = "root"
-$VIPassword = "vmware123"
+  "DeploymentTarget": {
+    "Type": "ESXI",
+    "Server": "10.0.0.171",
+    "Username": "root",
+    "Password": "VMware1!",
+	"TargetCluster": "<VC Deployment Only>"
+  }
 ```
 
 This section describes whether your deployment environment (destination) will be an ESXi host or a vCenter Server. You will need to specify either **ESXI** or **VCENTER** keyword:
