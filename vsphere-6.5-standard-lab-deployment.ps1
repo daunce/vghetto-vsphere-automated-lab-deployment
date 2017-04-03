@@ -76,6 +76,7 @@ $VCSAHostname = $DeployConfig.VCSA.Hostname
 $VCSAPrefix = $DeployConfig.VCSA.Prefix
 $VCSARootPassword = $DeployConfig.NestedDeploymentConfig.VMPassword
 $VCSASSHEnable = $DeployConfig.VCSA.SSHEnable
+$VCSAGateway = $DeployConfig.VCSA.VCSAGateway
 
 #SSO Configration
 $VCSASSODomainName = $DeployConfig.SSO.DomainName
@@ -756,7 +757,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.ip = $PSCIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $PSCHostname
         $config.'new.vcsa'.os.password = $PSCRootPassword
         if($VCSASSHEnable -eq "true") {
@@ -792,7 +793,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
         $config.'new.vcsa'.os.password = $VCSARootPassword
         if($VCSASSHEnable -eq "true") {
@@ -832,7 +833,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.ip = $PSCIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $PSCHostname
         $config.'new.vcsa'.os.password = $PSCRootPassword
         if($VCSASSHEnable -eq "true") {
@@ -868,7 +869,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
         $config.'new.vcsa'.os.password = $VCSARootPassword
         if($VCSASSHEnable -eq "true") {
@@ -908,7 +909,7 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
         $config.'new.vcsa'.os.password = $VCSARootPassword
         if($VCSASSHEnable -eq "true") {
@@ -945,7 +946,7 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
-        $config.'new.vcsa'.network.gateway = $VMGateway
+        $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
         $config.'new.vcsa'.os.password = $VCSARootPassword
         if($VCSASSHEnable -eq "true") {
