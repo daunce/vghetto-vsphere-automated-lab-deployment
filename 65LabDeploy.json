@@ -38,6 +38,7 @@
   	"DeploymentSize": "tiny",
 	"Displayname": "vCenter65-1",
 	"IPAddress": "10.0.0.185",
+	"VCSAGateway": "10.0.0.1",
 	"Hostname": "vCenter65-1.lab.virtualtassie.com",
 	"Prefix": "24",
 	"SSHEnable": "true"
