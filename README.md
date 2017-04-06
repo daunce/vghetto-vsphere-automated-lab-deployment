@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Description](#description)
-* [Usage] (#Usage)
+* [Usage] (#usage)
 * [Changelog](#changelog)
 * [Requirements](#requirements)
 * [Supported Deployments](#supported-deployments)
