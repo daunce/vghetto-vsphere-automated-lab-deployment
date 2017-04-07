@@ -1,0 +1,66 @@
+{
+  "FilePaths": {
+  	"NestedESXiApplianceOVA": "\\\\10.0.0.100\\iso\\VMware\\ESXi\\6.0\\Nested_ESXi6.x_Appliance_Template_v5.ova",
+	"VCSAInstaller": "\\\\10.0.0.100\\iso\\VMware\\Appliance\\6.0\\VMware-VCSA-all-6.0\\"
+  },
+  "DeploymentTarget": {
+    "Type": "ESXI",
+    "Server": "10.0.0.171",
+	"Username": "root",
+	"Password": "Pa$$w0rd",
+	"TargetCluster": "<VC Deployment Only>"
+  },
+  "NestedDeploymentConfig": {
+	"vSwitchType": "VSS",
+	"VMNetwork": "VM Network",
+	"VMDatastore": "SSD_DS01",
+	"VMNetmask": "255.255.255.0",
+	"VMGateway": "10.0.0.1",
+	"VMDNS": "10.0.0.160",
+	"VMNTP": "10.0.0.160",
+	"VMPassword": "VMware1!",
+	"VMDomain": "lab.virtualtassie.com",
+	"VMSyslog": "10.0.0.1"
+  },
+  "NestedESXi": {
+	"HostName": ["vesxi60-1","vesxi60-2","vesxi60-3"],
+	"IPAddress": ["10.0.0.190","10.0.0.191","10.0.0.192"],
+  	"vCPU": "2",
+	"vMEM": "6",
+	"CachingvDisk": "4",
+	"CapacityvDisk": "8",
+	"ESXISSH": "true",
+	"ESXIVMFS": "false"
+  },
+  "VCSA": {
+  	"DeploymentSize": "tiny",
+	"Displayname": "vCenter60-1",
+	"IPAddress": "10.0.0.195",
+	"VCSAGateway": "10.0.0.1",
+	"Hostname": "vCenter60-1.lab.virtualtassie.com",
+	"Prefix": "24",
+	"SSHEnable": "true"
+  },
+  "PSC": {
+  	"ExternalPSC": "0",
+	"Displayname": "PSC60-1",
+	"IPAddress": "10.0.0.196",
+	"Hostname": "PSC60-1.lab.virtualtassie.com"
+  },
+  "SSO": {
+  	"DomainName": "vsphere.local",
+	"SiteName": "Site1",
+	"Password": "VMware1!"
+  },
+  "Misc": {
+  	"NewvDCName": "Datacenter1",
+	"NewVSANClusterName": "Cluster1",
+	"AddHostByDNSName": "1"
+  },
+  "DNSCheck": {
+  	"CheckDNS": "1",
+	"WindowsDNSServer": "1",
+	"DNSServer": "DC01",
+	"DNSZoneName": "lab.virtualtassie.com"
+  }
+}

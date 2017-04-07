@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Description](#description)
-* [Usage] (#usage)
+* [Usage](#usage)
 * [Changelog](#changelog)
 * [Requirements](#requirements)
 * [Supported Deployments](#supported-deployments)
@@ -16,17 +16,22 @@
 
 Building on from [William Lam's automated deployment script](http://www.virtuallyghetto.com/2016/11/vghetto-automated-vsphere-lab-deployment-for-vsphere-6-0u2-vsphere-6-5.html), I've added some additional functionality that was useful to me and I hope other might find helpful as well.
 
-At this stage I've only worked on the 6.5 Standard deployment. If people like the functionality let me know and I will port it into the 6.0 scripts and the 6.5 self managed.
+At this stage I've only worked on the 6.5 and 6.0 Standard deployments. If people like the functionality let me know and I will see if I have time to port it into the 6.0 and 6.5 self managed.
 
 One of the major changes is that all of the configuration is now stored in a JSON files external to the script. There is no need to edit the .ps1 file.
 
 ## Usage
+Download the PS1 and JSON files from the repository. There is one JSON file template per deployment versions. Check the requirements section below for additional media and requirements for running the script.
 
-After editing the JSON file and putting in your desired configuration, run the attached PS1 and point it to the JSON file;
+After editing the JSON file and putting in your desired configuration, run the PS1 and point it to the JSON file using the syntax below;
 
 vsphere-6.5-standard-lab-deployment.ps1 -JSONConfigurationFile c:\scripts\65Lab.JSON
 
 ## Changelog
+
+* **07/04/2017**
+
+  * Modified the 6.0 deployment script to allow external PSC deployment, DNS check, add NTP to appliance deployment, separate gateway address for VCSA vs nested ESXi
 
 * **06/04/2017**
 
@@ -53,11 +58,11 @@ vsphere-6.5-standard-lab-deployment.ps1 -JSONConfigurationFile c:\scripts\65Lab.
 
 ## Supported Deployments
 
-William's original script supports Standard and Self Managed deployments of both vSphere 6 and 6.5. As mentioned in the intro, I have currently only made changes to the 6.5 Standard deployment.
+William's original script supports Standard and Self Managed deployments of both vSphere 6 and 6.5. As mentioned in the intro, I have currently only made changes to the 6.0/6.5 Standard deployments.
 
 ## Configuration
 
-This section describes the location of the files required for deployment. The first two are mandatory for the basic deployment. For advanced deployments such as NSX 6.3, you will need to download additional files and below are examples of what is required.
+This section describes the location of the files required for deployment. The first two are mandatory for the basic deployment and only the first two are appliacble for the 6.0 deployment. For advanced deployments such as NSX 6.3, you will need to download additional files and below are examples of what is required.
 
 Note that "\" in JSON is an escape character, so for full UNC paths you need to start with four slashes and then have 2 slashes in the rest of the path. For local paths, use two slahes for each directory. Examples of both are below.
 
@@ -99,7 +104,9 @@ This section describes the configuration of where the nested VMs (ESXI / VC / PS
 ```
 
 This section describes the configuration for the nested ESXi servers, including the names and IP addresses. If you want to deploy more than 3 ESXi servers, simply add another value to the comma separated array and add in an appropriate IP address as well.
+
 vCPU and vMEM define the virtual VPU count per nexted ESXi node and the RAM in GB.
+
 CachingvDisk and CapacityvDisk define the size in GB for VMDKs to be added to the ESXi node that will later be used for nested VSAN.
 ```console
   "NestedESXi": {
@@ -128,6 +135,7 @@ This section describes the VCSA deployment configuration such as the VCSA deploy
 ```
 
 If you want to deploy VCSA in an external configuration with an external PSC, change the value for ExternalPSC in this section to '1' and then fill in the details for the PSC node.
+
 Leaving ExternalPSC set to 0 will force an embedded VCSA deployment.
 ```console
   "PSC": {
@@ -148,6 +156,7 @@ This section describes the vSphere SSO configuration that is used regardless of 
 ```
 
 This section describes the configuration of the nested deployment. A new virtual DC and cluster are created in the nested VCSA and the nested hosts are added to the cluster.
+
 Toggle the last two settings with 0 (False) or 1 (True).
 ```console
   "Misc": {
@@ -159,7 +168,9 @@ Toggle the last two settings with 0 (False) or 1 (True).
 ```
 
 This section determines if you want to include a DNS check in the pre-checks. Setting "CheckDNS" to 1 will enable a Resolve-DNSName for all nested nodes to be performed.
+
 Note that this uses the hostname value defined in the sections for ESXi / VC / PSC / NSX.
+
 If your DNS server is a Windows server and the account you are using has privileges, you can opt for the deployment script to create the relative DNS records if the DNS lookup fails by filling in the other details in this section.
 ```console
   "DNSCheck": {
@@ -170,6 +181,7 @@ If your DNS server is a Windows server and the account you are using has privile
   }
 ```
 
+**Only relevant to 6.5 deployment**
 This section describes the NSX configuration if you choose to deploy which will require you to set $DeployNSX property to 1 and fill out all fields.
 ```console
   "NSX": {
@@ -188,6 +200,7 @@ This section describes the NSX configuration if you choose to deploy which will 
   }
 ```
 
+**Only relevant to 6.5 deployment**
 This section describes the VDS and VXLAN configurations which is required for NSX deployment. The only mandatory field here is $PrivateVXLANVMnetwork which is a private portgroup that must already exists which will be used to connect the second network adapter of the Nested ESXi VM for VXLAN traffic. You do not need a routable portgroup and the other properties can be left as default or you can modify them if you wish.
 ```console
 # VDS / VXLAN Configurations
@@ -201,7 +214,7 @@ This section describes the VDS and VXLAN configurations which is required for NS
 ```
 
 
-Once you have saved your changes, you can now run the PowerCLI script as you normally would.
+Once you have saved your changes, you can now run the PowerCLI script.
 
 ## Logging
 
@@ -211,6 +224,6 @@ There is additional verbose logging that outputs as a log file in your current w
 
 Once you have saved all your changes, you can then run the script. You will be provided with a summary of what will be deployed and you can verify that everything is correct before attempting the deployment. Below is a screenshot on what this would look like:
 
-![](vsphere-6.5-vghetto-lab-deployment-4-new.png)
+![](https://i1.wp.com/virtualtassie.com/wp-content/uploads/2017/04/65_Lab_Deployment_2.png)
 
 ## Sample Executions
