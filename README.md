@@ -172,6 +172,8 @@ This section determines if you want to include a DNS check in the pre-checks. Se
 Note that this uses the hostname value defined in the sections for ESXi / VC / PSC / NSX.
 
 If your DNS server is a Windows server and the account you are using has privileges, you can opt for the deployment script to create the relative DNS records if the DNS lookup fails by filling in the other details in this section.
+![](https://i0.wp.com/virtualtassie.com/wp-content/uploads/2017/04/Lab_Deploy_DNSCheck.png)
+
 ```console
   "DNSCheck": {
   	"CheckDNS": "1",
@@ -227,3 +229,9 @@ Once you have saved all your changes, you can then run the script. You will be p
 ![](https://i1.wp.com/virtualtassie.com/wp-content/uploads/2017/04/65_Lab_Deployment_2.png)
 
 ## Sample Executions
+
+Below is an example of the script deploying a vSphere 6.5 environment with embedded VCSA and 3 ESXi hosts, as well as a screenshot after logging into the target VC post deployment.
+
+![](https://i1.wp.com/virtualtassie.com/wp-content/uploads/2017/04/65_Lab_Deployment_3.png)
+
+![](https://i1.wp.com/virtualtassie.com/wp-content/uploads/2017/04/65_Lab_Deployment_4.png)
