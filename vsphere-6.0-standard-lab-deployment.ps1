@@ -25,6 +25,8 @@ param (
     [parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)][string]$JSONConfigurationFile
 )
 
+Get-Module –ListAvailable VM* | Import-Module
+
 if(!(Test-Path $JSONConfigurationFile)) {
     Write-Host -ForegroundColor Red "`nUnable to find JSON Configuration file at $JSONConfigurationFile ...`nexiting"
     exit
@@ -60,6 +62,7 @@ $NestedESXiCapacityvDisk = $DeployConfig.NestedESXi.CapacityvDisk
 
 # VCSA Deployment Configuration
 $VCSADeploymentSize = $DeployConfig.VCSA.DeploymentSize
+$VCSAImage = $DeployConfig.VCSA.Image
 $VCSADisplayName = $DeployConfig.VCSA.Displayname
 $VCSAIPAddress = $DeployConfig.VCSA.IPAddress
 $VCSAHostname = $DeployConfig.VCSA.Hostname
@@ -547,6 +550,7 @@ if ($deployVCSA -eq 1 -and $ExternalPSC -eq 1){
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $PSCIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $PSCHostname
@@ -584,6 +588,7 @@ if ($deployVCSA -eq 1 -and $ExternalPSC -eq 1){
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $VCSAIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $VCSAHostname
@@ -622,6 +627,7 @@ if ($deployVCSA -eq 1 -and $ExternalPSC -eq 1){
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $PSCIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $PSCHostname
@@ -659,6 +665,7 @@ if ($deployVCSA -eq 1 -and $ExternalPSC -eq 1){
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $VCSAIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $VCSAHostname
@@ -699,11 +706,13 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'target.vcsa'.appliance.'deployment.network' = $VMNetwork
         $config.'target.vcsa'.appliance.'thin.disk.mode' = $true
         $config.'target.vcsa'.appliance.'deployment.option' = $VCSADeploymentSize
+        add-member -InputObject $config.'target.vcsa'.appliance -MemberType NoteProperty -Name image -Value  "$($VCSAInstallerPath)\$VCSAImage"
         $config.'target.vcsa'.appliance.name = $VCSADisplayName
         $config.'target.vcsa'.network.'ip.family' = "ipv4"
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $VCSAIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $VCSAHostname
@@ -737,11 +746,13 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'target.vcsa'.appliance.'deployment.network' = $VMNetwork
         $config.'target.vcsa'.appliance.'thin.disk.mode' = $true
         $config.'target.vcsa'.appliance.'deployment.option' = $VCSADeploymentSize
+        add-member -InputObject $config.'target.vcsa'.appliance -MemberType NoteProperty -Name image -Value  "$($VCSAInstallerPath)\$VCSAImage"
         $config.'target.vcsa'.appliance.name = $VCSADisplayName
         $config.'target.vcsa'.network.'ip.family' = "ipv4"
         $config.'target.vcsa'.network.mode = "static"
         $config.'target.vcsa'.network.ip = $VCSAIPAddress
         $config.'target.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'target.vcsa'.network.'dns.servers'[1] = $null
         $config.'target.vcsa'.network.prefix = $VCSAPrefix
         $config.'target.vcsa'.network.gateway = $VCSAGateway
         $config.'target.vcsa'.network.hostname = $VCSAHostname

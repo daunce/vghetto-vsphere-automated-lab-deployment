@@ -756,6 +756,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $PSCIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $PSCHostname
@@ -792,6 +793,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
@@ -832,6 +834,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $PSCIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $PSCHostname
@@ -868,6 +871,7 @@ if ($ExternalPSC -eq 1){
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
@@ -908,6 +912,7 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
@@ -945,6 +950,7 @@ if($deployVCSA -eq 1 -and $ExternalPSC -eq 0) {
         $config.'new.vcsa'.network.mode = "static"
         $config.'new.vcsa'.network.ip = $VCSAIPAddress
         $config.'new.vcsa'.network.'dns.servers'[0] = $VMDNS
+        $config.'new.vcsa'.network.'dns.servers'[1] = $null
         $config.'new.vcsa'.network.prefix = $VCSAPrefix
         $config.'new.vcsa'.network.gateway = $VCSAGateway
         $config.'new.vcsa'.network.'system.name' = $VCSAHostname
